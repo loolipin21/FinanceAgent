@@ -1,0 +1,91 @@
+############
+#  Python  #
+############
+# Byte-code / cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual-envs
+.env/
+.venv/
+venv/
+env/
+# Conda artefacts
+*.conda
+*.egg-info/
+*.egg
+dist/
+build/
+
+####################
+#  Streamlit logs  #
+####################
+# Auto-generated watch files & logs
+.streamlit/
+# Streamlit session state pickle cache
+*.streamlit_cache/
+
+#############################
+#  IDE / Editor artefacts   #
+#############################
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+*~
+
+###################
+#  OS artefacts   #
+###################
+.DS_Store
+Thumbs.db
+desktop.ini
+
+#########################
+#  Testing artefacts    #
+#########################
+.pytest_cache/
+coverage.*
+htmlcov/
+
+###################
+#  Data outputs   #
+###################
+# FAISS vector indexes or other large binary stores
+faiss_index_folder/
+retrieval/faiss_store.*
+retrieval/*_index*
+
+# Uploads & temporary files
+streamlit_upload/
+uploads/
+tmp/
+temp/
+
+##############################
+#  Sensitive configuration   #
+##############################
+# Secrets, tokens, local overrides
+*.env
+.env.*
+# Keys or credential files
+*.key
+*.pem
+*.pfx
+
+################################
+#  Jupyter / Notebook support  #
+################################
+.ipynb_checkpoints/
+*.ipynb
+# Pickled model checkpoints
+*.ckpt
+*.pt
+*.bin
+
+summaries.json
