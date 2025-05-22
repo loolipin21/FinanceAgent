@@ -20,7 +20,7 @@ def build_retriever(summary_path: str = "summaries.json") -> MultiVectorRetrieve
 
     # Load previously saved vector index and document store (if available)
     if Path(INDEX_DIR).is_dir() and DOCSTORE_P.exists():
-        print("🔄  Loading existing FAISS index & doc-store …")
+        print("Loading existing FAISS index & doc-store …")
         vectorstore = FAISS.load_local(
             INDEX_DIR,
             OpenAIEmbeddings(),
@@ -91,7 +91,7 @@ def build_retriever(summary_path: str = "summaries.json") -> MultiVectorRetrieve
     with DOCSTORE_P.open("wb") as f:
         pickle.dump(docstore, f)
 
-    print("✅  Vectorstore & retriever are ready.")
+    print("Vectorstore & retriever are ready.")
     #Create Retriever
     return MultiVectorRetriever(
         vectorstore=vectorstore,

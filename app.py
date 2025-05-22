@@ -73,7 +73,7 @@ if uploaded:
     if file_path not in st.session_state.ingested_files:
         with open(file_path, "wb") as f:
             f.write(uploaded.getbuffer())
-        st.success(f"✅ Saved to `{file_path}`")
+        st.success(f"Saved to `{file_path}`")
         if INDEX_DIR.exists():
             shutil.rmtree(INDEX_DIR)
         ingest(file_path)
