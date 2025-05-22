@@ -58,7 +58,6 @@ htmlcov/
 ###################
 # FAISS vector indexes or other large binary stores
 faiss_index_folder/
-retrieval/faiss_store.*
 retrieval/*_index*
 
 # Uploads & temporary files

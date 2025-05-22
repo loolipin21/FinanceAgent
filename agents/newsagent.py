@@ -6,13 +6,17 @@ from langchain_openai import ChatOpenAI
 from langchain_community.tools.yahoo_finance_news import YahooFinanceNewsTool
 from transformers import pipeline
 
-#TODO: adds multi-ticker comparisons or adds a confidence_score average 
 
 @tool("get_finance_news")
 def get_finance_news(query: str) -> str:
     """
     Fetches the latest financial news headlines related to a stock ticker (e.g. 'AAPL' or 'TSLA').
-    Returns a string containing one or more news headlines.
+    Args:
+        query (str): A stock ticker symbol (e.g., "MSFT", "NVDA").
+    
+    Returns:
+        str: A newline-separated list of recent news headlines for the specified ticker. 
+             If no news is found, a message indicating that is returned.
     """
     yfnewstool = YahooFinanceNewsTool()
 
@@ -27,7 +31,13 @@ def summarize_news_tone(ticker: str) -> str:
     Fetches recent news headlines for a given stock ticker, analyzes their sentiment,
     and returns a summary of the overall tone.
 
-    Example input: 'AAPL', 'MSFT'
+    Args:
+        ticker (str): A stock ticker symbol (e.g., "GOOGL", "AMZN").
+    
+    Returns:
+        str: A summary of the overall sentiment (e.g., "POSITIVE") based on recent headlines.
+             Includes a count breakdown (positive, negative, neutral) and 2–3 example headlines with sentiment labels.
+             If no headlines are found, a fallback message is returned.
     """
     raw_headlines = YahooFinanceNewsTool().run(ticker)
     headlines = [h.strip() for h in raw_headlines.split("\n") if h.strip()]
@@ -37,7 +47,6 @@ def summarize_news_tone(ticker: str) -> str:
 
     sentiment_counts = {"POSITIVE": 0, "NEGATIVE": 0, "NEUTRAL": 0}
     scored_headlines = []
-    label_map = {"POS": "POSITIVE", "NEG": "NEGATIVE", "NEU": "NEUTRAL"}
 
     for h in headlines[:5]:  
         result = sentiment_pipeline(h)[0]

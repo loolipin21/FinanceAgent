@@ -6,10 +6,7 @@ from langgraph.prebuilt import create_react_agent
 from langchain_openai import ChatOpenAI
 
 
-@tool(
-    "get_stock_price",
-    description="Fetches the closing stock price for a given company on a specific date using its ticker symbol. For example, 'AAPL' for Apple, 'MSFT' for Microsoft."
-)
+@tool
 def get_stock_price(symbol: str, date: str) -> str:
     """
     This tool retrieves the historical closing price for a specified stock symbol on a given date.
@@ -17,6 +14,9 @@ def get_stock_price(symbol: str, date: str) -> str:
     Args:
         symbol: the first argument
         date: the second argument
+    Returns:
+        str: A JSON string containing the ticker symbol, date, and closing price.
+            If no data is available, returns a message indicating that.
     """
     date_obj = datetime.datetime.strptime(date, '%Y-%m-%d')
     
@@ -35,12 +35,11 @@ def get_stock_price(symbol: str, date: str) -> str:
     })
 
 
-@tool(
-    "get_price_trend",
-    description="Calculates the stock price trend over the past N days for a given ticker symbol. It computes the percentage change from the starting price to the most recent closing price."
-)
+@tool
 def get_price_trend(ticker: str, days: int = 7) -> str:
     """
+    Calculates the stock price trend over the specified number of most recent trading days.
+
     Args:
         ticker: Stock symbol (e.g. 'GOOGL', 'NVDA')
         days: Number of most recent trading days to compute trend (default: 7)
